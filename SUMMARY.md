@@ -1,0 +1,18 @@
+- [Overview](chapters/overview.md)
+- [Getting Access](chapters/1-getting-access.md)
+  - [Two Factor Authentication (2fa)](chapters/getting-access/two-factor-auth.md)
+  - [Synopsys Licensing](chapters/getting-access/synopsys-licensing.md)
+  - [Flux Allocation](chapters/getting-access/flux-allocation.md)
+- [Flux Login Servers](chapters/2-flux-login-servers.md)
+- [Running Jobs (_synthesis_)](chapters/3-running-jobs.md)
+  - diff between job queueing and interactive (overview)
+  - module load, list
+  - [Writing Job Scripts](chapters/running-jobs/writing-job-scripts.md)
+    - job limitations, no afs, no internet, scratchspace, setting appropriate attributes
+    - simple examples
+  - [PBS and useful tools](chapters/running-jobs/pbs-and-useful-tools.md)
+    - cli tools, qstat, qdel, etc
+- [Practical Examples (_and l33t h4x_)](chapters/4-practical-examples.md)
+  - [Manually Submit (_using Better Build System_)](chapters/practical-examples/manual-better-build.md)
+  - [Manually Submit after `git diff`](chapters/practical-examples/manual-git-diff.md)
+  - [Psuedo-daemon monitoring `git diff`](chapters/practical-examples/daemon-git-diff.md)
