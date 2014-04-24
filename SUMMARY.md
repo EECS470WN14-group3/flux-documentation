@@ -3,16 +3,12 @@
   - [Two Factor Authentication (2fa)](chapters/getting-access/two-factor-auth.md)
   - [Synopsys Licensing](chapters/getting-access/synopsys-licensing.md)
   - [Flux Allocation](chapters/getting-access/flux-allocation.md)
-- [Flux Login Servers](chapters/2-flux-login-servers.md)
-- [Running Jobs (_synthesis_)](chapters/3-running-jobs.md)
-  - diff between job queueing and interactive (overview)
-  - module load, list
+- [Running Jobs (_synthesis_)](chapters/2-running-jobs.md)
+  - [Flux Login Servers](chapters/running-jobs/flux-login-servers.md)
   - [Writing Job Scripts](chapters/running-jobs/writing-job-scripts.md)
-    - job limitations, no afs, no internet, scratchspace, setting appropriate attributes
-    - simple examples
   - [PBS and useful tools](chapters/running-jobs/pbs-and-useful-tools.md)
-    - cli tools, qstat, qdel, etc
-- [Practical Examples (_and l33t h4x_)](chapters/4-practical-examples.md)
-  - [Manually Submit (_using Better Build System_)](chapters/practical-examples/manual-better-build.md)
-  - [Manually Submit after `git diff`](chapters/practical-examples/manual-git-diff.md)
+- Practical Examples (_and l33t h4x_)
+  - [Manually Submit (_Using Better Build System_)](chapters/practical-examples/manual-better-build.md)
   - [Psuedo-daemon monitoring `git diff`](chapters/practical-examples/daemon-git-diff.md)
+- Appendices
+  - [Node Configuration](chapters/appendices/bennet-node-config.md)

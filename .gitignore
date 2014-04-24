@@ -19,3 +19,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# compiled book files
+*.pdf
+_book
