@@ -12,6 +12,7 @@ If for any reason that link stops working, try the
 website, or visit the [CAEN contact page](http://caen.engin.umich.edu/contact).
 
 
-## Useful Links
+<br><br><hr/>
+#### Useful Links
 - <http://caen.engin.umich.edu/software/access-to-synopsys-tools>
 - <https://docs.google.com/a/umich.edu/forms/d/1AGb6w2LbMf5wOI84SRNPEaNOXn76PgeMIp5Qiq1dTzI/viewform>

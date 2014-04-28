@@ -35,26 +35,10 @@ echo "Hello World!"
 
 As you can see, short of those 3 weird `#PBS` comment lines, this is just your
 regular old, run-of-the-mill bash script. We'll cover _how_ to submit this job
-in the next section. For now, __assume that running this job produces 2 new text
-files__ in the working directory: `hello-world-job.sh.o12253000` and
-`hello-world-job.sh.e12253000`.
-
-### Log Files
-You seem like a smart person; I'm guessing you've figured out that it's no
-coincidence they're named `{job-script}.{'o' or 'e'}{numbers}`. The
-default behavior of PBS is to dump two files into the directory that the job
-was __submitted from __. The `{numbers}` portion of the filename is the __Job
-ID__ which is established by PBS for tracking purposes and returned to the user
-upon successful submission. The `{'o' or 'e'}` portion indicates that these
-files contain the "output" and "error" logs, respectively. Remember how we said
-PBS runs "unattended programs?" Since we can't (generally speaking) watch
-`STDOUT` and `STDERR` while a job is running, PBS pipes everything from
-`STDOUT` into the `{'o'}` log and everything from `STDERR` into the `{'e'}`
-log. This way, we can review what the program printed to the terminal while we
-weren't watching.
-
-#### TL;DR
-`./le-job 1> le-job.sh.o1234567 2> le-job.sh.e1234567`
+in the next section. For now, __assume that running this job produces 2 new
+text files__ in the working directory: `hello-world-job.sh.o12253000` and
+`hello-world-job.sh.e12253000`. These files contain outpuf from `STDOUT` and
+`STDERR`, respectively. More on these files in just a minute.
 
 ### Job Attributes
 Let's turn your attention back to those 3 weird lines that start with `#PBS`.
@@ -73,55 +57,19 @@ were given via email.
 - Account `-A {your allocation name here}`
 - Quality of Service (QOS) `-l qos=flux`
 
-### Job Restrictions & Limitations
-At this point, it's probably a good idea to describe some of the restrictions
-and limitations on jobs. As you tweak and develop job scripts for *your*
-projects, keep the following in mind.
-
-+ __No internet access inside jobs__. While you can access the interwebs from the login nodes,
-   jobs are sandboxed. For the record, I can't find any reference that confirms
-   this fact, but I certainly witnessed and experienced it.
-
-   *If* you simply need to grab something from the interwebs before the job
-   runs (eg: clone a repository, grab the latest copy of some external file),
-   you can wrab the actual job script with a job "submission" script that will
-   perform these tasks *before* the job enters the queue.
-
-
-+ __No automatic [AFS](http://www.itcs.umich.edu/itcsdocs/r1070/) access__.
-   Meaning, by default, the Flux login nodes do *not* generate AFS
-   [tokens](http://www.itcs.umich.edu/scs/long.php) for you. If you need to
-   access AFS space, you'll need to obtain the appropriate AFS tokens manually:
-
-   ```sh
-   # list current tokens
-   $ tokens
-
-   # if "--End of list--" is displayed with no tokens, then you need to generate a token
-   $ aklog -c umich.edu
-
-   # now, unless something went wrong, you should have a token
-   $ tokens
-   ```
-
-   Fair warning that this *may* require you to enter your password, which means
-   you should definitely keep this out of job scripts. Entering passwords into
-   scripts == sketchy.
-
-    If you need something from AFS space for a job, obtain a token at the login
-   shell and wrap the job script a job "submission" script (same as #1 above).
-
-
-+ Accessing AFS and __network space is *super* slow__ and could easily become
-   a bottleneck in your batch jobs. Fortunately, HPC provides us with some
-   "scratch storage" space. 640TB of high-speed scratch storage space to be
-   exact. Therefore, it's a good idea (and best practice) to copy any files
-   needed by your job to your scratch space *before* the job executes (eg:
-   using a job "submission" script again).
-
-   Every authorized user on a project is granted scratch space in
-   `/scratch/{account}/{user}`. For example, my scratch space in Dr. Brehob's
-   trial allocation is located in `/scratch/brehob_flux/kylebs`.
+### Log Files
+You seem like a smart person; I'm guessing you've figured out that it's no
+coincidence they're named `{job-script}.{'o' or 'e'}{numbers}`. The
+default behavior of PBS is to dump two files into the directory that the job
+was __submitted from __. The `{numbers}` portion of the filename is the __Job
+ID__ which is established by PBS for tracking purposes and returned to the user
+upon successful submission. The `{'o' or 'e'}` portion indicates that these
+files contain the "output" and "error" logs, respectively. Remember how we said
+PBS runs "unattended programs?" Since we can't (generally speaking) watch
+`STDOUT` and `STDERR` while a job is running, PBS pipes everything from
+`STDOUT` into the `{'o'}` log and everything from `STDERR` into the `{'e'}`
+log. This way, we can review what the program printed to the terminal while we
+weren't watching.
 
 ### Environment Modules
 Flux is an incredibly complex system and must support the needs of many users.
@@ -187,6 +135,57 @@ describe it here. We'll be looking at the 4 most-common commands: `list`,
    versions `2012.06` and `2011.03`.
 
 
+### Job Restrictions & Limitations
+At this point, it's probably a good idea to describe some of the restrictions
+and limitations on jobs. As you tweak and develop job scripts for *your*
+projects, keep the following in mind.
+
++ __No internet access inside jobs__. While you can access the interwebs from the login nodes,
+   jobs are sandboxed. For the record, I can't find any reference that confirms
+   this fact, but I certainly witnessed and experienced it.
+
+   *If* you simply need to grab something from the interwebs before the job
+   runs (eg: clone a repository, grab the latest copy of some external file),
+   you can wrab the actual job script with a job "submission" script that will
+   perform these tasks *before* the job enters the queue.
+
+
++ __No automatic [AFS](http://www.itcs.umich.edu/itcsdocs/r1070/) access__.
+   Meaning, by default, the Flux login nodes do *not* generate AFS
+   [tokens](http://www.itcs.umich.edu/scs/long.php) for you. If you need to
+   access AFS space, you'll need to obtain the appropriate AFS tokens manually:
+
+   ```sh
+   # list current tokens
+   $ tokens
+
+   # if "--End of list--" is displayed with no tokens, then you need to generate a token
+   $ aklog -c umich.edu
+
+   # now, unless something went wrong, you should have a token
+   $ tokens
+   ```
+
+   Fair warning that this *may* require you to enter your password, which means
+   you should definitely keep this out of job scripts. Entering passwords into
+   scripts == sketchy.
+
+    If you need something from AFS space for a job, obtain a token at the login
+   shell and wrap the job script a job "submission" script (same as #1 above).
+
+
++ Accessing AFS and __network space is *super* slow__ and could easily become
+   a bottleneck in your batch jobs. Fortunately, HPC provides us with some
+   "scratch storage" space. 640TB of high-speed scratch storage space to be
+   exact. Therefore, it's a good idea (and best practice) to copy any files
+   needed by your job to your scratch space *before* the job executes (eg:
+   using a job "submission" script again).
+
+   Every authorized user on a project is granted scratch space in
+   `/scratch/{account}/{user}`. For example, my scratch space in Dr. Brehob's
+   trial allocation is located in `/scratch/brehob_flux/kylebs`.
+
+
 ## Simple 2-Script Synthesis Job
 
 Now that we've covered the fundamentals, let's consider a basic synthesis job
@@ -197,7 +196,7 @@ that uses 2 different scripts (a very common structure):
 *NOTE: If run as-is, __this job will fail__! Keep reading to find out why*
 
 Here's the pre-submission script, `pre-sub.sh`:
-```sh
+```bash
 #!/bin/bash
 
 export JOB_SCRIPT=job-script.sh
@@ -223,7 +222,7 @@ echo "JobID: $JOB_ID"
 ```
 
 Here's the actual job script, `job-script.sh`:
-```sh
+```bash
 #!/bin/bash
 #PBS -S /bin/sh
 #PBS -N eecs470synth
@@ -295,6 +294,7 @@ aware of this issue; we'll give some example code to take care of this in the
 final chapter, "Practical Examples".
 
 
-## Useful Links
+<br><br><hr/>
+#### Useful Links
 - <http://cac.engin.umich.edu/resources/software/pbs>
 - <http://cac.engin.umich.edu/resources/systems/nyx/pbs>

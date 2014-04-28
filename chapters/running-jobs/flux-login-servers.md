@@ -31,6 +31,18 @@ yourself a high five!
 ![Flux SSH welcome banner](ssh-welcome-banner.png)
 
 
+## Login Server Guidelines
+Remember that the [login nodes](http://cac.engin.umich.edu/resources/login-nodes)
+are intended for just that: logging in and submitting jobs to the cluster. You
+should __never run resource-intensive commands at the login shell__; that's what
+the worker nodes are for!
+
+If you need to run an interactive script that _is_ resource intensive (can't
+think of any reason you'd do this in EECS 470),
+[submit an interactive job](http://cac.engin.umich.edu/resources/systems/nyx/pbs#interactive).
+
+<br>
+### Protips
 If, like me, typing out `flux-login.engin.umich.edu` over and over annoys you,
 open `~/.ssh/config` with your favorite editor and add the following lines:
 
@@ -46,19 +58,12 @@ Now when you want to log into Flux, you need only type:
 $ ssh flux
 ```
 
-Finally, if you'd like to try setting up [SSH multiplexing](http://en.wikibooks.org/wiki/OpenSSH/Cookbook/Multiplexing), CAC has a mini-guide on the [two factor authentication page](http://cac.engin.umich.edu/resources/login-nodes/tfa#TOC-Multiplexing-an-SSH-session)
+If you'd like to try setting up [SSH multiplexing](http://en.wikibooks.org/wiki/OpenSSH/Cookbook/Multiplexing),
+CAC has a mini-guide on the
+[two factor authentication page](http://cac.engin.umich.edu/resources/login-nodes/tfa#TOC-Multiplexing-an-SSH-session)
 
 
-## Login Server Guidelines
-Remember that the [login nodes](http://cac.engin.umich.edu/resources/login-nodes)
-are intended for just that: logging in and submitting jobs to the cluster. You
-should __never run resource-intensive commands at the login shell__; that's what
-the worker nodes are for!
 
-If you need to run an interactive script that _is_ resource intensive (can't
-think of any reason you'd do this in EECS 470),
-[submit an interactive job](http://cac.engin.umich.edu/resources/systems/nyx/pbs#interactive).
-
-
-## Useful Links
+<br><br><hr/>
+#### Useful Links
 - <http://cac.engin.umich.edu/resources/login-nodes>

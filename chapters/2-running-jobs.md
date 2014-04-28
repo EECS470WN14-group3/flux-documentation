@@ -8,6 +8,14 @@ batch systems, unlike the interactive shell that you're likely accommodated to
 unattended programs without requiring (or, generally speaking, allowing) user
 interaction.
 
+## Topics Covered
+This chapter is the meat-and-potatoes of this guide and will cover the
+following topics:
+
+- Logging into Flux
+- Writing scripts to run jobs
+- Submitting jobs, `PBS`, and other useful tools
+
 ## The Concept
 Using the login server, you'll issue a command that will submit a job to the worker
 queue. Once the queue selects your job for execution, a worker node will start
@@ -24,15 +32,8 @@ synthesis on Flux, log off, grab a bite to eat, log back in an hour or two
 later, and view the `proc.rep` file to make sure everything work as expected.
 __No more all-nighters in 1695 waiting for builds to complete__!
 
-## Topics Covered
-This chapter is the meat-and-potatoes of this guide and will cover the
-following topics:
 
-- Logging into Flux
-- Writing scripts to run jobs
-- Submitting jobs, `PBS`, and other useful tools
-
-
-## Useful Links
+<br><br><hr/>
+#### Useful Links
 - Batch Processing: <http://en.wikipedia.org/wiki/Batch_processing>
 - Job Schedulers: <http://en.wikipedia.org/wiki/Job_scheduler>

@@ -33,6 +33,7 @@ we faced with Synopsys. __He's the man__.
 - (734) 764-6226
 
 
-## Useful Links
+<br><br><hr/>
+#### Useful Links
 - Getting Started at the CAC: <http://cac.engin.umich.edu/getting-started>
 - Managing a Flux Project: <http://arc.research.umich.edu/flux-and-other-hpc-resources/flux/managing-a-flux-project/>

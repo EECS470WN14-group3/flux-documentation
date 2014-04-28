@@ -7,6 +7,7 @@
   - [Flux Login Servers](chapters/running-jobs/flux-login-servers.md)
   - [Writing Job Scripts](chapters/running-jobs/writing-job-scripts.md)
   - [PBS and useful tools](chapters/running-jobs/pbs-and-useful-tools.md)
+- [TL;DR](chapters/3-the-last-tldr-youll-ever-need.md)
 - Practical Examples (_and l33t h4x_)
   - [Manually Submit (_Using Better Build System_)](chapters/practical-examples/manual-better-build.md)
   - [Psuedo-daemon monitoring `git diff`](chapters/practical-examples/daemon-git-diff.md)

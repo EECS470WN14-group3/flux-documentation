@@ -36,7 +36,8 @@ The following information was provided by [Dan Barker](mailto:danbarke@umich.edu
 > - The allocation [could] take 1-2 business days to set up, so if you specify a start date of today, you may "lose" a day's worth of access.
 
 
-## Useful Links
+<br><br><hr/>
+#### Useful Links
 - Terminology & How Flux Works: <http://arc.research.umich.edu/flux-and-other-hpc-resources/flux/how-flux-works/>
 - Allocation information: <http://arc.research.umich.edu/flux-and-other-hpc-resources/flux/managing-a-flux-project/>
 - Current prices: <http://arc.research.umich.edu/flux-and-other-hpc-resources/flux/hardware-services/>

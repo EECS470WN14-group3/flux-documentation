@@ -39,6 +39,7 @@ Flux is giant cluster of computers with lots of parallel computing power. This
 guide will teach you how to run synthesis on Flux.
 
 
-## Useful Links
+<br><br><hr/>
+#### Useful Links
 - HPC Homepage: <http://caen.engin.umich.edu/hpc/overview>
 - Flux Specs and Configuations<http://caen.engin.umich.edu/hpc/flux-configuration>

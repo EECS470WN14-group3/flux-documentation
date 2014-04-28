@@ -147,7 +147,7 @@ $ qdel 12256691
 ## Handy One-liners
 Here are a few handy bash one-liners I like to use when working with PBS:
 ```bash
-# leave a terminal open with this running to constantly montior my jobs
+# leave a terminal open with this running to constantly monitor my jobs
 $ while [ 1 ]; do qstat -u $USER; sleep 1; done
 
 # list all jobs in a CSV-ish format that's easy to parse
@@ -164,7 +164,8 @@ $ qstat -u $USER | grep -E '^[0-9]+' | tr -s '[:blank:]' ',' | cut -d',' -f1,10 
 ```
 
 
-## Useful Links
+<br><br><hr/>
+#### Useful Links
 - CAC PBS Guide for nyx: <http://cac.engin.umich.edu/resources/systems/nyx/pbs>
 - CAC General PBS Guide: <http://cac.engin.umich.edu/resources/software/pbs>
 - *Free* HPC Video Tutorials: <http://arc.research.umich.edu/training-workshops/online-training-resources/>

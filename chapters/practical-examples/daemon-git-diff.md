@@ -1,5 +1,5 @@
-Pseudo-daemon Monitoring `git diff`
-===================================
+Pseudo-daemon Monitoring with `git diff`
+========================================
 
 This is an enhancement to the code in `manual-better-build.md` that adds
 intelligent `git diff` checking and a "pseudo-daemon" that runs in the
