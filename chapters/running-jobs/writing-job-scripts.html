@@ -1,0 +1,609 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head prefix="og: http://ogp.me/ns# book: http://ogp.me/ns/book#">
+        
+        <meta charset="UTF-8">
+        <title>Writing Job Scripts | Getting Started with Flux for EECS 470</title>
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="robots" content="index, follow">
+        <meta name="author" content="EECS470WN14-group3">
+        <meta name="description" content="Prepared for Dr. Mark Brehob by Kyle Smith, Winter 2014">
+        <meta name="keywords" content="gitbook,github" >
+        <meta name="generator" content="www.gitbook.io">
+
+        
+        <link rel="next" href="../../chapters/running-jobs/pbs-and-useful-tools.html" />
+        
+        
+        <link rel="prev" href="../../chapters/running-jobs/flux-login-servers.html" />
+        
+
+        <meta property="og:title" content="Writing Job Scripts | Getting Started with Flux for EECS 470">
+        <meta property="og:site_name" content="Getting Started with Flux for EECS 470">
+        <meta property="og:type" content="book">
+        <meta property="og:locale" content="en_US">
+
+        <meta property="book:author" content="https://github.com/EECS470WN14-group3">
+        <meta property="book:tag" content="GitBook">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    </head>
+    <body>
+        
+
+        <link rel="stylesheet" href="../../gitbook/style.css">
+        
+
+
+        
+    <div class="book" data-github="EECS470WN14-group3/flux-documentation" data-level="3.2" data-basepath="../.." data-revision="1398717120817">
+    <div class="book-header">
+    <!-- Actions Left -->
+    
+    <a href="https://github.com/EECS470WN14-group3/flux-documentation" target="_blank" class="btn pull-left"><i class="fa fa-github-alt"></i></a>
+    
+    <a href="#" class="btn pull-left toggle-summary"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search"><i class="fa fa-search"></i></a>
+    <span id="font-settings-wrapper">
+        <a href="#" class="btn pull-left toggle-font-settings"><i class="fa fa-font"></i>
+        </a>
+        <div class="dropdown-menu font-settings">
+	<div class="dropdown-caret">
+  <span class="caret-outer"></span>
+  <span class="caret-inner"></span>
+</div>
+
+	<div class="btn-group btn-block">
+		<button id="reduce-font-size" class="btn btn-default">A</button>
+		<button id="enlarge-font-size" class="btn btn-default">A</button>
+	</div>
+
+	<ul class="list-group font-family-list">
+		<li class="list-group-item" data-font="0">Serif</li>
+		<li class="list-group-item" data-font="1">Sans</li>
+	</ul>
+
+	<div class="btn-group btn-group-xs btn-block color-theme-list">
+	  <button type="button" class="btn btn-default" id="color-theme-preview-0" data-theme="0">White</button>
+	  <button type="button" class="btn btn-default" id="color-theme-preview-1" data-theme="1">Sepia</button>
+	  <button type="button" class="btn btn-default" id="color-theme-preview-2" data-theme="2">Night</button>
+	</div>
+</div>
+
+    </span>
+
+    <!-- Actions Right -->
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="google-plus"><i class="fa fa-google-plus"></i></a>
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="facebook"><i class="fa fa-facebook"></i></a>
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="twitter"><i class="fa fa-twitter"></i></a>
+
+    
+    <a href="https://github.com/EECS470WN14-group3/flux-documentation/stargazers" target="_blank" class="btn pull-right count-star"><i class="fa fa-star-o"></i> Star (<span>-</span>)</a>
+    <a href="https://github.com/EECS470WN14-group3/flux-documentation/watchers" target="_blank" class="btn pull-right count-watch"><i class="fa fa-eye"></i> Watch (<span>-</span>)</a>
+    
+
+    <!-- Title -->
+    <h1><a href="../../" >Getting Started with Flux for EECS 470</a></h1>
+</div>
+
+    <div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Search" class="form-control" />
+    </div>
+    <ul class="summary">
+        
+        <li>
+            <a href="https://github.com/EECS470WN14-group3" target="blank">About the author</a>
+        </li>
+        <li>
+            <a href="https://github.com/EECS470WN14-group3/flux-documentation/issues" target="blank">Questions and Issues</a>
+        </li>
+        <li>
+            <a href="https://github.com/EECS470WN14-group3/flux-documentation/edit/master/chapters/running-jobs/writing-job-scripts.md" target="blank">Edit and Contribute</a>
+        </li>
+        <li class="divider"></li>
+        
+        <li data-level="0" data-path="index.html">
+            <a href="../../"><i class="fa fa-check"></i> Introduction</a>
+        </li>
+        
+            <li  data-level="1" data-path="chapters/overview.html">
+                
+                <a href="../../chapters/overview.html">
+                    <i class="fa fa-check"></i> <b>1.</b> Overview
+                </a>
+                
+                
+            </li>
+        
+            <li  data-level="2" data-path="chapters/1-getting-access.html">
+                
+                <a href="../../chapters/1-getting-access.html">
+                    <i class="fa fa-check"></i> <b>2.</b> Getting Access
+                </a>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="2.1" data-path="chapters/getting-access/two-factor-auth.html">
+                            
+                            <a href="../../chapters/getting-access/two-factor-auth.html">
+                                <i class="fa fa-check"></i> <b>2.1.</b> Two Factor Authentication (2fa)
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.2" data-path="chapters/getting-access/synopsys-licensing.html">
+                            
+                            <a href="../../chapters/getting-access/synopsys-licensing.html">
+                                <i class="fa fa-check"></i> <b>2.2.</b> Synopsys Licensing
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.3" data-path="chapters/getting-access/flux-allocation.html">
+                            
+                            <a href="../../chapters/getting-access/flux-allocation.html">
+                                <i class="fa fa-check"></i> <b>2.3.</b> Flux Allocation
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+            <li  data-level="3" data-path="chapters/2-running-jobs.html">
+                
+                <a href="../../chapters/2-running-jobs.html">
+                    <i class="fa fa-check"></i> <b>3.</b> Running Jobs (_synthesis_)
+                </a>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="3.1" data-path="chapters/running-jobs/flux-login-servers.html">
+                            
+                            <a href="../../chapters/running-jobs/flux-login-servers.html">
+                                <i class="fa fa-check"></i> <b>3.1.</b> Flux Login Servers
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="3.2" data-path="chapters/running-jobs/writing-job-scripts.html">
+                            
+                            <a href="../../chapters/running-jobs/writing-job-scripts.html">
+                                <i class="fa fa-check"></i> <b>3.2.</b> Writing Job Scripts
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="3.3" data-path="chapters/running-jobs/pbs-and-useful-tools.html">
+                            
+                            <a href="../../chapters/running-jobs/pbs-and-useful-tools.html">
+                                <i class="fa fa-check"></i> <b>3.3.</b> PBS and useful tools
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+            <li  data-level="4" data-path="chapters/3-the-last-tldr-youll-ever-need.html">
+                
+                <a href="../../chapters/3-the-last-tldr-youll-ever-need.html">
+                    <i class="fa fa-check"></i> <b>4.</b> TL;DR
+                </a>
+                
+                
+            </li>
+        
+            <li  data-level="5" >
+                
+                <span><b>5.</b> Practical Examples (_and l33t h4x_)</span>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="5.1" data-path="chapters/practical-examples/manual-better-build.html">
+                            
+                            <a href="../../chapters/practical-examples/manual-better-build.html">
+                                <i class="fa fa-check"></i> <b>5.1.</b> Manually Submit (_Using Better Build System_)
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="5.2" data-path="chapters/practical-examples/daemon-git-diff.html">
+                            
+                            <a href="../../chapters/practical-examples/daemon-git-diff.html">
+                                <i class="fa fa-check"></i> <b>5.2.</b> Psuedo-daemon monitoring `git diff`
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+            <li  data-level="6" >
+                
+                <span><b>6.</b> Appendices</span>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="6.1" data-path="chapters/appendices/bennet-node-config.html">
+                            
+                            <a href="../../chapters/appendices/bennet-node-config.html">
+                                <i class="fa fa-check"></i> <b>6.1.</b> Node Configuration
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="page-wrapper" tabindex="-1">
+                <div class="book-progress">
+    <div class="bar">
+        <div class="inner" style="width: 61.53846153846154%;min-width: 53.84615384615385%;"></div>
+    </div>
+    <div class="chapters">
+    
+        <a href="../../index.html" title="Introduction" class="chapter done new-chapter" data-progress="0" style="left: 0%;"></a>
+    
+        <a href="../../chapters/overview.html" title="Overview" class="chapter done new-chapter" data-progress="1" style="left: 7.6923076923076925%;"></a>
+    
+        <a href="../../chapters/1-getting-access.html" title="Getting Access" class="chapter done new-chapter" data-progress="2" style="left: 15.384615384615385%;"></a>
+    
+        <a href="../../chapters/getting-access/two-factor-auth.html" title="Two Factor Authentication (2fa)" class="chapter done " data-progress="2.1" style="left: 23.076923076923077%;"></a>
+    
+        <a href="../../chapters/getting-access/synopsys-licensing.html" title="Synopsys Licensing" class="chapter done " data-progress="2.2" style="left: 30.76923076923077%;"></a>
+    
+        <a href="../../chapters/getting-access/flux-allocation.html" title="Flux Allocation" class="chapter done " data-progress="2.3" style="left: 38.46153846153846%;"></a>
+    
+        <a href="../../chapters/2-running-jobs.html" title="Running Jobs (_synthesis_)" class="chapter done new-chapter" data-progress="3" style="left: 46.15384615384615%;"></a>
+    
+        <a href="../../chapters/running-jobs/flux-login-servers.html" title="Flux Login Servers" class="chapter done " data-progress="3.1" style="left: 53.84615384615385%;"></a>
+    
+        <a href="../../chapters/running-jobs/writing-job-scripts.html" title="Writing Job Scripts" class="chapter done " data-progress="3.2" style="left: 61.53846153846154%;"></a>
+    
+        <a href="../../chapters/running-jobs/pbs-and-useful-tools.html" title="PBS and useful tools" class="chapter  " data-progress="3.3" style="left: 69.23076923076923%;"></a>
+    
+        <a href="../../chapters/3-the-last-tldr-youll-ever-need.html" title="TL;DR" class="chapter  new-chapter" data-progress="4" style="left: 76.92307692307692%;"></a>
+    
+        <a href="../../chapters/practical-examples/manual-better-build.html" title="Manually Submit (_Using Better Build System_)" class="chapter  " data-progress="5.1" style="left: 84.61538461538461%;"></a>
+    
+        <a href="../../chapters/practical-examples/daemon-git-diff.html" title="Psuedo-daemon monitoring `git diff`" class="chapter  " data-progress="5.2" style="left: 92.3076923076923%;"></a>
+    
+        <a href="../../chapters/appendices/bennet-node-config.html" title="Node Configuration" class="chapter  " data-progress="6.1" style="left: 100%;"></a>
+    
+    </div>
+</div>
+
+                <div class="page-inner">
+                
+                    <section class="normal" id="section-gitbook_14">
+                    
+                        <h1 id="writing-job-scripts">Writing Job Scripts</h1>
+<p>Now that you can access the login nodes, it&#39;s time to start writing job
+scripts. Job scripts are what you submit to the job scheduler to be put in the
+worker queue. On Flux, we use
+<a href="http://en.wikipedia.org/wiki/Portable_Batch_System" target="_blank">Portable Batch System (PBS)</a>
+(covered in more detail next chapter). For EECS 470, our job scripts will be
+simple shell scripts that <strong>copy files</strong> and <strong>invoke
+<a href="https://www.gnu.org/software/make/" target="_blank"><code>make</code></a></strong>.</p>
+<h2 id="quick-disclaimer">Quick Disclaimer</h2>
+<p><strong>This isn&#39;t supposed to be a guide on shell scripting</strong>. If
+you already have a good handle on command-line tools like <code>make</code>, understanding
+job scripts should be cake; however, if you don&#39;t feel comfortable with the
+Black Screen of Wonder™, you should copy-paste the example code provided later
+on, <em>OR</em> find a friend and work through it. <strong>I won&#39;t spend time</strong> explaining
+<strong>standard commands</strong> or <strong>scripting practices</strong>. If you want to strengthen your
+BASH-fu, you might consider spending some time reverse-engineering posts on
+<a href="http://www.commandlinefu.com/" target="_blank">commandlinefu.com</a>.</p>
+<h2 id="hello-world">Hello World</h2>
+<p>No guide would be complete without a &quot;Hello World&quot; example, so here&#39;s ours.
+Consider the below shell script, titled <code>hello-world-job.sh</code>:</p>
+<pre><code class="lang-bash"><span class="hljs-shebang">#!/bin/bash</span>
+<span class="hljs-comment">#PBS -A brehob_flux</span>
+<span class="hljs-comment">#PBS -l qos=flux</span>
+<span class="hljs-comment">#PBS -q flux</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Hello World!"</span>
+</code></pre>
+<p>As you can see, short of those 3 weird <code>#PBS</code> comment lines, this is just your
+regular old, run-of-the-mill bash script. We&#39;ll cover <em>how</em> to submit this job
+in the next section. For now, <strong>assume that running this job produces 2 new
+text files</strong> in the working directory: <code>hello-world-job.sh.o12253000</code> and
+<code>hello-world-job.sh.e12253000</code>. These files contain outpuf from <code>STDOUT</code> and
+<code>STDERR</code>, respectively. More on these files in just a minute.</p>
+<h3 id="job-attributes">Job Attributes</h3>
+<p>Let&#39;s turn your attention back to those 3 weird lines that start with <code>#PBS</code>.
+These are obviously comments of some sort (the line <em>does</em> starts with a <code>#</code>),
+but what are they and why do we need them for our simple &quot;Hello World&quot; job?
+<strong>These comments</strong> are <strong>special directives</strong> to the job scheduler that specify
+<a href="http://cac.engin.umich.edu/resources/software/pbs#TOC-The-PBS-script-parameters" target="_blank">job attributes</a>.
+There are many attributes that you can set and a full list is available on the
+<a href="http://cac.engin.umich.edu/resources/software/pbs" target="_blank">CAC PBS reference page</a>.</p>
+<p>While many attributes are optional, <strong>all</strong> jobs <strong><em>must</em></strong> specify Queue,
+Account, and Quality of Service (QOS). Queue and QOS should stick to the
+default values listed below while Account should use the allocation name you
+were given via email.</p>
+<ul>
+<li>Queue <code>-q flux</code></li>
+<li>Account <code>-A {your allocation name here}</code></li>
+<li>Quality of Service (QOS) <code>-l qos=flux</code></li>
+</ul>
+<h3 id="log-files">Log Files</h3>
+<p>You seem like a smart person; I&#39;m guessing you&#39;ve figured out that it&#39;s no
+coincidence they&#39;re named <code>{job-script}.{&#39;o&#39; or &#39;e&#39;}{numbers}</code>. The
+default behavior of PBS is to dump two files into the directory that the job
+was <strong>submitted from </strong>. The <code>{numbers}</code> portion of the filename is the <strong>Job
+ID</strong> which is established by PBS for tracking purposes and returned to the user
+upon successful submission. The <code>{&#39;o&#39; or &#39;e&#39;}</code> portion indicates that these
+files contain the &quot;output&quot; and &quot;error&quot; logs, respectively. Remember how we said
+PBS runs &quot;unattended programs?&quot; Since we can&#39;t (generally speaking) watch
+<code>STDOUT</code> and <code>STDERR</code> while a job is running, PBS pipes everything from
+<code>STDOUT</code> into the <code>{&#39;o&#39;}</code> log and everything from <code>STDERR</code> into the <code>{&#39;e&#39;}</code>
+log. This way, we can review what the program printed to the terminal while we
+weren&#39;t watching.</p>
+<h3 id="environment-modules">Environment Modules</h3>
+<p>Flux is an incredibly complex system and must support the needs of many users.
+Due to the nature of High Performance Computing, the HPC Group has to be
+extremely careful with software versioning; many jobs will run for weeks,
+months, and even years.</p>
+<p>In order to better-accommodate the wide range of users and software
+requirements (versions), Flux makes use of
+<a href="http://cac.engin.umich.edu/resources/software/environment-modules" target="_blank">environment modules</a>
+to <strong>dynamically load and unload</strong> common <strong>software packages</strong>.</p>
+<p>As a user of Flux, you need to be aware of this because, as you&#39;ll soon find,
+just because a software package is <em>installed</em> (available), does <strong>NOT</strong> mean
+it&#39;s accessible for use (loaded). <strong>Synopsys is an example of one package that
+is available but <em>NOT</em> loaded by default</strong>.</p>
+<p>More command line tools will be covered in the next section; however, since you
+need to understand <code>module</code> to work through the next example job, lets quickly
+describe it here. We&#39;ll be looking at the 4 most-common commands: <code>list</code>,
+<code>available</code>, <code>load</code>, and <code>unload</code>.</p>
+<ol>
+<li><p><strong><code>list</code>:</strong> List packages that are currently loaded into the environment:</p>
+<pre><code class="lang-sh">$ module list
+</code></pre>
+<p><img src="loaded-modules.png" alt="list loaded modules"></p>
+</li>
+<li><p><strong><code>available</code>:</strong> List packages that are installed but <em>not</em> currently
+loaded:</p>
+<pre><code class="lang-sh">$ module available
+</code></pre>
+<p><img src="available-modules.png" alt="list available modules"></p>
+</li>
+<li><p><strong><code>load</code>:</strong> Load an <em>available</em> package into the current environment. For
+example, to load the default version of synopsys and vcs:</p>
+<pre><code class="lang-sh">$ module load synopsys vcs
+</code></pre>
+<p><img src="load-synopsys-vcs.png" alt="load synopsys and vcs"></p>
+<p>As you can see, <code>2013.03-SP1</code> and <code>2013.06-sp1</code> are the default versions of
+Synopsys and VCS, respectively.</p>
+</li>
+<li><p><strong><code>unload</code>:</strong> Remove a loaded package from the current environment. For
+example, to unload the current versions of synopsys and vcs:</p>
+<pre><code class="lang-sh">$ module unload synopsys vcs
+</code></pre>
+<p>And to specifically load in older versions by tag:</p>
+<pre><code class="lang-sh">$ module load synopsys/2012.06 vcs/2011.03
+</code></pre>
+<p><img src="unload-load-synopsys-vcs.png" alt="unload load synopsys and vcs"></p>
+<p>As you can see, we unload <code>2013.03-SP1</code> and <code>2013.06-sp1</code> and load in legacy
+versions <code>2012.06</code> and <code>2011.03</code>.</p>
+</li>
+</ol>
+<h3 id="job-restrictions-limitations">Job Restrictions &amp; Limitations</h3>
+<p>At this point, it&#39;s probably a good idea to describe some of the restrictions
+and limitations on jobs. As you tweak and develop job scripts for <em>your</em>
+projects, keep the following in mind.</p>
+<ul>
+<li><p><strong>No internet access inside jobs</strong>. While you can access the interwebs from the login nodes,
+ jobs are sandboxed. For the record, I can&#39;t find any reference that confirms
+ this fact, but I certainly witnessed and experienced it.</p>
+<p> <em>If</em> you simply need to grab something from the interwebs before the job
+ runs (eg: clone a repository, grab the latest copy of some external file),
+ you can wrab the actual job script with a job &quot;submission&quot; script that will
+ perform these tasks <em>before</em> the job enters the queue.</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>No automatic <a href="http://www.itcs.umich.edu/itcsdocs/r1070/" target="_blank">AFS</a> access</strong>.
+ Meaning, by default, the Flux login nodes do <em>not</em> generate AFS
+ <a href="http://www.itcs.umich.edu/scs/long.php" target="_blank">tokens</a> for you. If you need to
+ access AFS space, you&#39;ll need to obtain the appropriate AFS tokens manually:</p>
+<pre><code class="lang-sh"> # list current tokens
+ $ tokens
+
+ # if &quot;--End of list--&quot; is displayed with no tokens, then you need to generate a token
+ $ aklog -c umich.edu
+
+ # now, unless something went wrong, you should have a token
+ $ tokens
+</code></pre>
+<p> Fair warning that this <em>may</em> require you to enter your password, which means
+ you should definitely keep this out of job scripts. Entering passwords into
+ scripts == sketchy.</p>
+<p>  If you need something from AFS space for a job, obtain a token at the login
+ shell and wrap the job script a job &quot;submission&quot; script (same as #1 above).</p>
+</li>
+</ul>
+<ul>
+<li><p>Accessing AFS and <strong>network space is <em>super</em> slow</strong> and could easily become
+ a bottleneck in your batch jobs. Fortunately, HPC provides us with some
+ &quot;scratch storage&quot; space. 640TB of high-speed scratch storage space to be
+ exact. Therefore, it&#39;s a good idea (and best practice) to copy any files
+ needed by your job to your scratch space <em>before</em> the job executes (eg:
+ using a job &quot;submission&quot; script again).</p>
+<p> Every authorized user on a project is granted scratch space in
+ <code>/scratch/{account}/{user}</code>. For example, my scratch space in Dr. Brehob&#39;s
+ trial allocation is located in <code>/scratch/brehob_flux/kylebs</code>.</p>
+</li>
+</ul>
+<h2 id="simple-2-script-synthesis-job">Simple 2-Script Synthesis Job</h2>
+<p>Now that we&#39;ve covered the fundamentals, let&#39;s consider a basic synthesis job
+that uses 2 different scripts (a very common structure):</p>
+<ul>
+<li>1 for pre-submission file operations</li>
+<li>1 for the actual job</li>
+</ul>
+<p><em>NOTE: If run as-is, <strong>this job will fail</strong>! Keep reading to find out why</em></p>
+<p>Here&#39;s the pre-submission script, <code>pre-sub.sh</code>:</p>
+<pre><code class="lang-bash"><span class="hljs-shebang">#!/bin/bash
+</span>
+<span class="hljs-keyword">export</span> JOB_SCRIPT=job-script.sh
+<span class="hljs-keyword">export</span> PROJ_DIR=`<span class="hljs-built_in">pwd</span>`
+<span class="hljs-keyword">export</span> SCRATCH_SPACE=<span class="hljs-string">"/scratch/brehob_flux/<span class="hljs-variable">$USER</span>"</span>
+
+<span class="hljs-comment"># Need to load synopsys and vcs modules</span>
+module load synopsys/<span class="hljs-number">2013.03</span>-SP1
+module load vcs/<span class="hljs-number">2013.06</span>-sp1
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Submitting job..."</span>
+JOB_ID=`qsub <span class="hljs-variable">$JOB_SCRIPT</span>`
+<span class="hljs-keyword">if</span> [ <span class="hljs-string">"$?"</span> <span class="hljs-operator">-ne</span> <span class="hljs-string">'0'</span> ]; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">"Error: Could not submit job via qsub"</span>
+  <span class="hljs-keyword">exit</span> <span class="hljs-number">1</span>
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-built_in">unset</span> JOB_SCRIPT
+<span class="hljs-built_in">unset</span> PROJ_DIR
+<span class="hljs-built_in">unset</span> SCRATCH_SPACE
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"JobID: <span class="hljs-variable">$JOB_ID</span>"</span>
+</code></pre>
+<p>Here&#39;s the actual job script, <code>job-script.sh</code>:</p>
+<pre><code class="lang-bash"><span class="hljs-shebang">#!/bin/bash</span>
+<span class="hljs-comment">#PBS -S /bin/sh</span>
+<span class="hljs-comment">#PBS -N eecs470synth</span>
+<span class="hljs-comment">#PBS -A brehob_flux</span>
+<span class="hljs-comment">#PBS -q flux</span>
+<span class="hljs-comment">#PBS -l qos=flux,nodes=1:ppn=12,mem=47gb,pmem=4000mb,walltime=05:00:00</span>
+<span class="hljs-comment">#PBS -V</span>
+
+<span class="hljs-comment"># copy the project dir to the scratch space</span>
+temp_dir=<span class="hljs-string">"<span class="hljs-variable">$SCRATCH_SPACE</span>/<span class="hljs-variable">$PBS_JOBID</span>"</span>
+mkdir -p <span class="hljs-string">"<span class="hljs-variable">$temp_dir</span>"</span>
+<span class="hljs-built_in">cd</span> <span class="hljs-string">"<span class="hljs-variable">$temp_dir</span>"</span>
+cp -R <span class="hljs-string">"<span class="hljs-variable">$PROJ_DIR</span>"</span> .
+make syn
+</code></pre>
+<p>In a nutshell, to launch a new job, you&#39;d move both scripts into the
+root of your project directory and start the <code>pre-sub.sh</code> by running the
+following command from the login shell:</p>
+<pre><code class="lang-sh">$ ./pre-sub.sh
+</code></pre>
+<p>A few things would then happen:</p>
+<ol>
+<li><code>$PROJ_DIR</code> would be set to the current working directory (the one where you Makefile lives)</li>
+<li><code>$SCRATCH_SPACE</code> would be set to the absolute path to your scratch space. In this example, my allocation is named <code>brehob_flux</code></li>
+<li>Synopsys and VCS are loaded into the environment (specific versions are targeted)</li>
+<li>A mysterious new command, <code>qsub</code>, is issued and the job is submitted. If the return code (<code>$?</code>) is anything besides <code>0</code>, then the job submission failed and we print an error message and exit.</li>
+</ol>
+<p>Assuming the job was submitted and queded up successfully, then, sometime
+later, a worker node would start <code>job-script.sh</code> and a few more things would
+happen:</p>
+<ol>
+<li>A few <strong>new job parameters are used</strong>, notably:<ul>
+<li><code>-V</code>, which tells the scheduler to propagate the current enviornment (the
+one that submitted the job to begin with) into this one. This is <strong>extremely
+important</strong> because it will make the exported environment variables (ie:
+<code>$PROJ_DIR</code> and <code>$SCRATCH_SPACE</code>) available to the job, <em>and</em> will ensure
+that previously loaded modules (ie: Synopsys and VCS) are also available.</li>
+<li><code>-l nodes=1:ppn=12,mem47gb,pmem=4000mb,walltime=05:00:00</code>, which sets up
+the node architecture. <a href="mailto:bennet@umich.edu" target="_blank">Bennet Fauber</a> did an
+excellent job at describing how these values affect the job performance;
+you can read an excerpt from
+<a href="../appendices/bennet-node-config.html">his email in the appendix</a>.
+Unless you&#39;ve been gifted with a
+<a href="http://arc.research.umich.edu/flux-and-other-hpc-resources/flux/flux-configuration/" target="_blank">high memory</a>
+allocation, stick to these defaults; they&#39;re tried and true.</li>
+</ul>
+</li>
+<li>A new directory is created in your scratch space with a name equal to the job&#39;s ID.</li>
+<li>The project directory that the job was submitted from is copied to scratch space.</li>
+<li>Synthesis is started by invoking <code>make syn</code>.</li>
+</ol>
+<p>Now for the bad news: unfortunately, while this looks good and seems correct,
+there are hidden dependencies in the synthesis files for Better Build System
+that will cause synthesis to fail. Specifically, <code>scripts/default.tcl</code> contains
+the following line of code:</p>
+<pre><code class="lang-tcl">set search_path &quot;/afs/umich.edu/class/eecs470/lib/synopsys/&quot;
+</code></pre>
+<p>Essentially, <strong>EECS 470 uses custom libraries</strong> that must be loaded in at synthesis
+time. Since the files are <strong>on AFS</strong>, the <strong>load will fail</strong> because, as we know, there
+isn&#39;t a valid AFS token in the job enviornment.</p>
+<p>Fortunately, there&#39;s an easy (but dirty) solution: <strong>copy all the included files</strong>
+to the scratch space <em>before</em> the job executes, and use <code>sed</code> or another tool
+to replace all instances of the old path with the new one. For now, just be
+aware of this issue; we&#39;ll give some example code to take care of this in the
+final chapter, &quot;Practical Examples&quot;.</p>
+<p><br><br><hr/></p>
+<h4 id="useful-links">Useful Links</h4>
+<ul>
+<li><a href="http://cac.engin.umich.edu/resources/software/pbs" target="_blank">http://cac.engin.umich.edu/resources/software/pbs</a></li>
+<li><a href="http://cac.engin.umich.edu/resources/systems/nyx/pbs" target="_blank">http://cac.engin.umich.edu/resources/systems/nyx/pbs</a></li>
+</ul>
+
+                    
+                    </section>
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../../chapters/running-jobs/flux-login-servers.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../../chapters/running-jobs/pbs-and-useful-tools.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/mode-javascript.js"></script>
+        <script src="../../gitbook/jsrepl/jsrepl.js" id="jsrepl-script"></script>
+        <script src="../../gitbook/app.js"></script>
+        
+
+    
+    <script src="../../gitbook/plugins/gitbook-plugin-mixpanel/plugin.js"></script>
+    
+
+    
+    <script src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+    
+    <script src="../../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {};
+    gitbook.start(config);
+});
+</script>
+
+    </body>
+</html>
